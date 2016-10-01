@@ -47,30 +47,28 @@ def treeify(path):
     print("\n{} {}, {} {}".format(nDir, sDir, nFil, sFil))
 
 
+def branchChoice(dirContents):
+        return CONT_BRANCH if key < (len(dirContents) - 1) else END_BRANCH
+
+
 def treeify_helper(path, depth, colContinues, nDir, nFil, no_hidden=True):
     # determine which lines we need
     leftSpace = makeLeftspace(colContinues)
-
     # get contents
     dirContents = os.listdir(path)
-
     # remove hidden files
     if no_hidden:
         dirContents = removeHidden(dirContents)
-
     dirContents = sortIgnoreCaseandPunc(dirContents)
-
     # recurse and print
     for key, thing in enumerate(dirContents):
-        branch = CONT_BRANCH if key < (len(dirContents) - 1) else END_BRANCH
-
+        branch = branchChoice(dirContents)
         if os.path.isdir(os.path.join(path, thing)):
             cC = list(colContinues)
             if key < (len(dirContents) - 1):
                 cC.append(True)
             else:
                 cC.append(False)
-
             print(leftSpace + branch + os.path.basename(thing))
             d, f = treeify_helper(os.path.join(path, thing), depth + 1, cC, 1, 0)
             nDir += d
