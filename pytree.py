@@ -47,7 +47,7 @@ def treeify(path):
     print("\n{} {}, {} {}".format(nDir, sDir, nFil, sFil))
 
 
-def branchChoice(dirContents):
+def branchChoice(key, dirContents):
         return CONT_BRANCH if key < (len(dirContents) - 1) else END_BRANCH
 
 
@@ -62,7 +62,7 @@ def treeify_helper(path, depth, colContinues, nDir, nFil, no_hidden=True):
     dirContents = sortIgnoreCaseandPunc(dirContents)
     # recurse and print
     for key, thing in enumerate(dirContents):
-        branch = branchChoice(dirContents)
+        branch = branchChoice(key, dirContents)
         if os.path.isdir(os.path.join(path, thing)):
             cC = list(colContinues)
             if key < (len(dirContents) - 1):
