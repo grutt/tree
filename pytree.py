@@ -27,7 +27,7 @@ def makeLeftspace(colContinues):
 
 
 def sortIgnoreCaseandPunc(dirContents):
-    # http://stackoverflow.com/questions/3939361/remove-specific-characters-from-a-string-in-python 
+    # http://stackoverflow.com/questions/3939361/remove-specific-characters-from-a-string-in-python
     # http://stackoverflow.com/questions/9764298/is-it-possible-to-sort-two-listswhich-reference-each-other-in-the-exact-same-w
     stdStrs = []
 
