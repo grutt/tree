@@ -31,19 +31,27 @@ def sortIgnoreCaseandPunc(dirContents):
     # http://stackoverflow.com/questions/9764298/is-it-possible-to-sort-two-listswhich-reference-each-other-in-the-exact-same-w
     stdStrs = []
 
-    translation_table = dict.fromkeys(map(ord, string.punctuation), None)
-    for i in dirContents:
-        stdStrs.append(i.translate(translation_table).lower())
-    stdStrs, dirContents = (list(t) for t in zip(*sorted(zip(stdStrs, dirContents))))
-    return dirContents
+    if(len(dirContents) == 0):
+        return dirContents
+    else:
+        translation_table = dict.fromkeys(map(ord, string.punctuation), None)
+        for i in dirContents:
+            stdStrs.append(i.translate(translation_table).lower())
+        stdStrs, dirContents = (list(t) for t in zip(*sorted(zip(stdStrs, dirContents))))
+        return dirContents
 
 
 def treeify(path):
-    print(path)
-    nDir, nFil = treeify_helper(path, 0, [], 0, 0)
-    sDir = "directory" if nDir == 1 else "directories"
-    sFil = "file" if nDir == 1 else "files"
+    if(os.path.isdir(path)):
+        print(path)
+        nDir, nFil = treeify_helper(path, 0, [], 0, 0)
+    else:
+        nDir = 0
+        nFil = 0
+        print(path + " [error opening dir]")
 
+    sDir = "directory" if nDir == 1 else "directories"
+    sFil = "file" if nFil == 1 else "files"
     print("\n{} {}, {} {}".format(nDir, sDir, nFil, sFil))
 
 
